@@ -14,6 +14,10 @@
 .sop/state/*
 !.sop/state/README.md
 
+# ===== AI agent 本地配置(不进仓库) =====
+.codebuddy/
+.claude/
+
 # ===== 通用 =====
 node_modules/
 *.log

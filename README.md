@@ -65,7 +65,6 @@ clone 本仓库后,在 WorkBuddy 中打开本项目,直接说:
 │   ├── examples/            # 示例产物(试跑 PRD + 视觉规格 HTML)
 │   └── research/            # 项目调研报告
 ├── .workbuddy/skills/       # 项目级技能(随仓库分发,克隆即用)
-├── skills-dist/             # 技能分发包(zip,可手动安装)
 └── .gitignore
 ```
 
@@ -80,5 +79,5 @@ clone 本仓库后,在 WorkBuddy 中打开本项目,直接说:
 
 - **纯 Markdown**,零脚本依赖,可在任何支持读文件的 AI 工具中使用;
 - `AGENTS.md` 软连接在 **Windows 上 clone** 需要 git 配置 `core.symlinks=true`,否则会退化为普通文件(可手动重建软连接);
-- 规则演进:修改 `docs/sop/` 与 `.sop/` 后,同步更新 `.workbuddy/skills/req-sop-harness/` 技能包,再重新打包 `skills-dist/req-sop-harness.zip`;
+- 规则演进:修改 `docs/sop/` 与 `.sop/` 后,同步更新 `.workbuddy/skills/req-sop-harness/` 技能包;
 - 许可证:见仓库 LICENSE(如适用)。

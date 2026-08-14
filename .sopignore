@@ -1,0 +1,47 @@
+# .sopignore
+
+# SOP Harness 上下文扫描排除规则(参考 ai .gitignore)
+# 用途:/sop:init 与 /sop:req 扫描项目时,排除以下目录/文件
+# 语法:每行一个 pattern,支持通配符;以 # 开头为注释
+
+# 版本控制与依赖
+.git/
+.svn/
+node_modules/
+vendor/
+dist/
+build/
+out/
+target/
+
+# 锁文件与生成物
+*.lock
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+go.sum
+Cargo.lock
+
+# 环境与密钥(绝不可作为上下文)
+.env
+*.pem
+*.key
+secrets/
+credentials/
+
+# 状态与临时
+.sop/state/        # 状态由 Harness 自己读写,无需扫描
+*.log
+.tmp/
+.cache/
+
+# 大体积/无关文件
+*.zip
+*.tar.gz
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.exe
+*.dll

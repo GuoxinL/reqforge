@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>视觉规格:HTML 状态看板(Status Board)</title>
+<style>
+/* ===== 1. 设计令牌(Tokens)— 所有颜色/尺寸必须引用本区块,禁止硬编码 ===== */
+:root{
+  --brand-primary:#185FA5;         /* 主色:当前阶段高亮 / 主按钮 */
+  --brand-primary-hover:#0C447C;   /* 悬停 */
+  --brand-bg:#E6F1FB;              /* 顶部导航底 / 选中态浅底 */
+  --success:#0F6E56;               /* 阶段状态:已完成 */
+  --success-bg:#E1F5EE;
+  --warning:#BA7517;               /* 阶段状态:阻塞 / 待确认 */
+  --warning-bg:#FAEEDA;
+  --danger:#A32D2D;                /* 阶段状态:错误 / 解析失败 */
+  --danger-bg:#FCEBEB;
+  --idle:#888780;                  /* 阶段状态:未开始 */
+  --idle-bg:#F1EFE8;
+  --text-primary:#2C2C2A; --text-secondary:#5F5E5A; --text-disable:#888780;
+  --border:#D3D1C7; --bg-surface:#F1EFE8;
+  --radius:8px; --radius-lg:12px; --gap:12px; --padding:16px;
+}
+/* ===== 2. 基础样式 ===== */
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:960px;margin:0 auto;padding:24px;color:var(--text-primary);font-size:14px;line-height:1.6;}
+h1{font-size:22px;} h2{font-size:17px;margin-top:28px;} h3{font-size:14px;margin-bottom:6px;}
+.block{border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin:16px 0;background:#fff;}
+.meta{color:var(--text-secondary);font-size:13px;}
+.swatches{display:flex;gap:var(--gap);flex-wrap:wrap;}
+.swatch{width:104px;}
+.swatch .color{height:44px;border-radius:var(--radius);border:0.5px solid var(--border);}
+.swatch p{margin:4px 0 0;font-size:12px;}
+.swatch .hex{font-family:monospace;color:var(--text-secondary);}
+.demo-btn{display:inline-block;padding:6px 16px;border-radius:var(--radius);border:0.5px solid var(--brand-primary);background:var(--brand-primary);color:#fff;font-size:13px;cursor:pointer;}
+.demo-btn:hover{background:var(--brand-primary-hover);border-color:var(--brand-primary-hover);}
+.demo-btn:disabled{background:var(--bg-surface);border-color:var(--border);color:var(--text-disable);cursor:not-allowed;}
+</style>
+</head>
+<body>
+<h1>视觉规格 — HTML 状态看板(Status Board)</h1>
+<p class="meta">所属 PRD:<a href="PRD-StatusBoard-v1.md">PRD-StatusBoard-v1.md</a> | 版本:v1.0 | 更新:2026-08-14</p>
+
+<!-- ================= 模块 1:整体看板布局 ================= -->
+<section id="board" class="block">
+  <h2>模块:看板整体布局(对应 FR-001/FR-002)</h2>
+
+  <h3>配色(状态语义色)</h3>
+  <div class="swatches">
+    <div class="swatch"><div class="color" style="background:var(--brand-primary)"></div><p>进行中</p><p class="hex">#185FA5</p></div>
+    <div class="swatch"><div class="color" style="background:var(--success)"></div><p>已完成</p><p class="hex">#0F6E56</p></div>
+    <div class="swatch"><div class="color" style="background:var(--warning)"></div><p>阻塞/待确认</p><p class="hex">#BA7517</p></div>
+    <div class="swatch"><div class="color" style="background:var(--danger)"></div><p>错误</p><p class="hex">#A32D2D</p></div>
+    <div class="swatch"><div class="color" style="background:var(--idle)"></div><p>未开始</p><p class="hex">#888780</p></div>
+    <div class="swatch"><div class="color" style="background:var(--text-primary)"></div><p>文字主色</p><p class="hex">#2C2C2A</p></div>
+  </div>
+
+  <h3>布局(看板骨架)</h3>
+  <div class="layout" style="border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;background:#fff;">
+    <div style="background:var(--brand-bg);padding:6px 12px;font-size:12px;color:var(--text-primary);display:flex;justify-content:space-between;">
+      <span>顶部导航:SOP Harness · 项目名 · 当前阶段徽标</span><span>[刷新按钮]</span>
+    </div>
+    <div style="padding:8px 12px;border-bottom:0.5px solid var(--border);font-size:12px;color:var(--text-secondary);">
+      阶段进度条:① 采集 ●—— ② 澄清 ●—— ③ 结构化 ○—— ④ 评审 ○—— ⑤ 门禁 ○—— ⑥ 交付 ○
+    </div>
+    <div style="display:flex;min-height:140px;">
+      <div style="width:180px;background:var(--bg-surface);padding:10px;font-size:12px;color:var(--text-secondary);">
+        左栏:六阶段列表(每项:状态点 + 阶段名 + 产物链接)<br><br>
+        ① 采集 ● 已完成<br>② 澄清 ● 进行中<br>③ 结构化 ○ 未开始<br>④ 评审 ○ 未开始<br>⑤ 门禁 ○ 未开始<br>⑥ 交付 ○ 未开始
+      </div>
+      <div style="flex:1;padding:12px 16px;">
+        <p style="font-size:13px;font-weight:500;margin:0 0 6px;">右栏:当前阶段详情</p>
+        <p class="meta">待确认项(3)· 最近决策(5 条)· 产物文件链接</p>
+        <button class="demo-btn">刷新看板</button>
+      </div>
+    </div>
+  </div>
+
+  <h3>间距与尺寸</h3>
+  <p class="meta">看板内边距:16px;模块间距:12px;圆角:8px(小元素)/ 12px(卡片);左栏宽 180px;状态点直径 8px;阶段徽标:12px 字 + 4px 圆角胶囊。</p>
+</section>
+
+<!-- ================= 模块 2:阶段状态点 ================= -->
+<section id="stages" class="block">
+  <h2>模块:阶段状态点(对应 FR-002)</h2>
+  <h3>组件与状态</h3>
+  <p style="font-size:13px;margin:6px 0;">四种状态,颜色 + 文字/图标双重标识(可访问性要求,不单靠颜色):</p>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:13px;align-items:center;">
+    <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--idle);"></span> 未开始(灰)</span>
+    <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-primary);"></span> 进行中(蓝,当前阶段高亮 + 加粗)</span>
+    <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--success);"></span> 已完成(绿)</span>
+    <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warning);"></span> 阻塞/待确认(琥珀,右侧显示 "!" 图标)</span>
+  </div>
+  <h3>空态 / 错误态</h3>
+  <p class="meta">未初始化:全灰六阶段 + 居中引导文案"未执行 /sop:init" + 引导按钮;单文件解析失败:该区块显示危险色边框 + "解析失败"标签,其余区块正常。</p>
+</section>
+
+<!-- ================= 模块 3:侧栏(待确认 + 决策) ================= -->
+<section id="sidebar" class="block">
+  <h2>模块:侧栏待确认项与最近决策(对应 FR-003/FR-004)</h2>
+  <h3>组件与状态</h3>
+  <p style="font-size:13px;margin:6px 0;">待确认项:方形勾选框(本地勾选态,不影响 state 文件),文字 13px;</p>
+  <p style="font-size:13px;margin:6px 0;">最近决策:日期(等宽字体 12px,次要色)+ 决策摘要(主色文字),最多 5 条,按日期倒序;</p>
+  <p style="font-size:13px;margin:6px 0;">产物链接:蓝色链接样式,缺失时显示灰色"未产出"占位。</p>
+  <h3>空态</h3>
+  <p class="meta">无待确认项:显示"当前无待确认项"(次要色);decisions.md 缺失:该区块隐藏并提示"无决策记录"。</p>
+</section>
+
+<section id="tokens" class="block">
+  <h2>全局设计令牌(供研发直接引用)</h2>
+  <p class="meta">--brand-primary:#185FA5 | --brand-primary-hover:#0C447C | --brand-bg:#E6F1FB | --success:#0F6E56 | --success-bg:#E1F5EE | --warning:#BA7517 | --warning-bg:#FAEEDA | --danger:#A32D2D | --danger-bg:#FCEBEB | --idle:#888780 | --idle-bg:#F1EFE8 | --text-primary:#2C2C2A | --text-secondary:#5F5E5A | --radius:8px | --radius-lg:12px | --gap:12px | --padding:16px</p>
+</section>
+</body>
+</html>

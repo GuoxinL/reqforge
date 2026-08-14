@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>视觉规格:功能名</title>
+<style>
+/* ===== 1. 设计令牌(Tokens)— AI 只改本区块,下方所有组件一律引用变量,禁止硬编码 ===== */
+:root{
+  --brand-primary:#185FA5;         /* 主按钮 / 链接 / 选中态 */
+  --brand-primary-hover:#0C447C;   /* 悬停态 */
+  --brand-bg:#E6F1FB;              /* 品牌浅色底 */
+  --success:#0F6E56; --warning:#BA7517; --danger:#A32D2D;
+  --text-primary:#2C2C2A; --text-secondary:#5F5E5A; --text-disable:#888780;
+  --border:#D3D1C7; --bg-surface:#F1EFE8;
+  --radius:8px; --gap:12px; --padding:16px;
+}
+/* ===== 2. 基础样式 ===== */
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:960px;margin:0 auto;padding:24px;color:var(--text-primary);font-size:14px;line-height:1.6;}
+h1{font-size:22px;} h2{font-size:17px;margin-top:28px;} h3{font-size:14px;margin-bottom:6px;}
+.block{border:0.5px solid var(--border);border-radius:12px;padding:16px 20px;margin:16px 0;background:#fff;}
+.meta{color:var(--text-secondary);font-size:13px;}
+.swatches{display:flex;gap:var(--gap);flex-wrap:wrap;}
+.swatch{width:104px;}
+.swatch .color{height:44px;border-radius:var(--radius);border:0.5px solid var(--border);}
+.swatch p{margin:4px 0 0;font-size:12px;}
+.swatch .hex{font-family:monospace;color:var(--text-secondary);}
+.demo-btn{display:inline-block;padding:6px 16px;border-radius:var(--radius);border:0.5px solid var(--brand-primary);background:var(--brand-primary);color:#fff;font-size:13px;cursor:pointer;}
+.demo-btn:hover{background:var(--brand-primary-hover);border-color:var(--brand-primary-hover);}
+.demo-btn:disabled{background:var(--bg-surface);border-color:var(--border);color:var(--text-disable);cursor:not-allowed;}
+.demo-input{padding:6px 10px;border:0.5px solid var(--border);border-radius:var(--radius);font-size:13px;}
+.demo-input:focus{outline:none;border-color:var(--brand-primary);}
+.layout-demo{border:0.5px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;}
+.layout-demo .topbar{background:var(--brand-bg);padding:6px 12px;font-size:12px;color:var(--text-primary);}
+.layout-demo .body{display:flex;min-height:110px;}
+.layout-demo .side{width:88px;background:var(--bg-surface);padding:8px;font-size:12px;color:var(--text-secondary);}
+.layout-demo .main{flex:1;padding:12px 16px;}
+.layout-demo .main p{margin:0 0 10px;}
+</style>
+</head>
+<body>
+<h1>视觉规格 — <功能名></h1>
+<p class="meta">所属 PRD:<a href="PRD-xxx.md">PRD-xxx.md</a> | 版本:v1.0 | 更新:<日期></p>
+
+<!-- ===== 一个模块一个 section,id 与 PRD 中的引用锚点一致(module-xxx) ===== -->
+<section id="module-xxx" class="block">
+  <h2>模块:<模块名>(对应 FR-xxx)</h2>
+
+  <h3>配色</h3>
+  <div class="swatches">
+    <div class="swatch"><div class="color" style="background:var(--brand-primary)"></div><p>主按钮</p><p class="hex">#185FA5</p></div>
+    <div class="swatch"><div class="color" style="background:var(--success)"></div><p>成功</p><p class="hex">#0F6E56</p></div>
+    <div class="swatch"><div class="color" style="background:var(--danger)"></div><p>错误</p><p class="hex">#A32D2D</p></div>
+    <div class="swatch"><div class="color" style="background:var(--text-primary)"></div><p>文字</p><p class="hex">#2C2C2A</p></div>
+  </div>
+
+  <h3>布局</h3>
+  <div class="layout-demo">
+    <div class="topbar">顶部导航(品牌区 · 搜索 · 用户入口)</div>
+    <div class="body">
+      <div class="side">侧栏菜单项</div>
+      <div class="main">
+        <p><strong>内容区标题</strong></p>
+        <p class="meta">描述文本 / 表单区域</p>
+        <button class="demo-btn">主要操作</button>
+      </div>
+    </div>
+  </div>
+
+  <h3>组件与状态</h3>
+  <p><button class="demo-btn">正常</button> <button class="demo-btn" disabled>禁用</button> 悬停:鼠标移到"正常"按钮查看</p>
+  <p><input class="demo-input" placeholder="输入框示例" value="默认值"> 聚焦态:点击输入框查看</p>
+  <p class="meta">加载态:主按钮文字替换为"加载中…"并置灰;空态/错误态文案见 PRD 异常流程。</p>
+
+  <h3>间距与尺寸</h3>
+  <p class="meta">模块内边距:16px;组件间距:12px;圆角:8px;按钮高度:32px(6px 上下 padding + 20px 行高)。</p>
+</section>
+
+<section id="tokens" class="block">
+  <h2>全局设计令牌(供研发直接引用)</h2>
+  <p class="meta">--brand-primary:#185FA5 | --brand-primary-hover:#0C447C | --brand-bg:#E6F1FB | --success:#0F6E56 | --warning:#BA7517 | --danger:#A32D2D | --text-primary:#2C2C2A | --text-secondary:#5F5E5A | --radius:8px | --gap:12px | --padding:16px</p>
+</section>
+
+<!--
+使用说明(AI 生成完成后删除本注释):
+1. 每个需要视觉规格的功能模块复制一个 section,id 与 PRD 引用锚点一致(module-xxx);
+2. 所有颜色/尺寸必须引用 :root 变量,禁止硬编码;新增色值先加进 :root;
+3. MD 中的引用格式:视觉规格见 [PRD-xxx-视觉规格.html#module-xxx](PRD-xxx-视觉规格.html#module-xxx);
+4. 不涉及视觉的功能无需生成本文件。
+-->
+</body>
+</html>

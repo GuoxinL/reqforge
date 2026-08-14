@@ -1,14 +1,16 @@
-# 需求整理 SOP Harness(项目内嵌版)
+# ReqForge — 需求整理 SOP Harness
 
 把"原始需求 → 结构化需求文档(PRD)"的完整流程,以**纯 Markdown 规则库**的形式装进任意项目:六阶段(采集 → 澄清 → 结构化 → 评审 → 门禁 → 交付),每阶段有明确的"该做什么/不该做什么",产出物经**人工评审**通过后才进入下一阶段。不绑定任何 AI 工具。
 
+> 仓库:`https://github.com/GuoxinL/reqforge`
+
 ## 快速开始(最快:复制提示词,零门槛)
 
-把下面提示词中的 `<你的仓库地址>` 替换为本仓库 URL,复制全部内容,粘贴到你的 agent(需支持执行 `git clone` 与文件操作,如 Claude Code / Cursor / CodeBuddy / WorkBuddy)对话中执行——**它会自动 clone 本仓库 → 部署规则到当前项目 → 清理临时目录,执行完即安装好**:
+复制下方提示词(仓库地址已内置),粘贴到你的 agent(需支持执行 `git clone` 与文件操作,如 Claude Code / Cursor / CodeBuddy / WorkBuddy)对话中执行——**它会自动 clone 本仓库 → 部署规则到当前项目 → 清理临时目录,执行完即安装好**:
 
 ```text
 你是安装助手。请把「需求整理 SOP Harness」安装到当前项目,按以下步骤执行:
-1. git clone <你的仓库地址> /tmp/sop-harness-install
+1. git clone https://github.com/GuoxinL/reqforge.git /tmp/sop-harness-install
 2. 将 /tmp/sop-harness-install/.sop/ 复制为当前项目根目录 .sop/;若当前项目没有 docs/sop/,将 /tmp/sop-harness-install/docs/sop/ 复制为当前项目的 docs/sop/
 3. 接入 AGENTS.md:
    - 已存在:末尾追加(保留原内容,已有 "SOP Harness 引用段" 标记则跳过):
@@ -59,7 +61,9 @@ clone 本仓库后,在 WorkBuddy 中打开本项目,直接说:
 ├── .sop/                    # 运行时规则库(SOP.md 主规则 / commands / templates / checklists / state)
 ├── docs/
 │   ├── sop/                 # 六阶段完整 DO/DON'T 规则(权威源)
-│   └── requirements/        # 需求工作目录:<日期>-<需求名>/ 下 01~06 阶段产物全留存
+│   ├── requirements/        # 需求工作目录:<日期>-<需求名>/ 下 01~06 阶段产物全留存
+│   ├── examples/            # 示例产物(试跑 PRD + 视觉规格 HTML)
+│   └── research/            # 项目调研报告
 ├── .workbuddy/skills/       # 项目级技能(随仓库分发,克隆即用)
 ├── skills-dist/             # 技能分发包(zip,可手动安装)
 └── .gitignore
@@ -69,7 +73,8 @@ clone 本仓库后,在 WorkBuddy 中打开本项目,直接说:
 
 - 每个新需求一个目录 `docs/requirements/<YYYYMMDD>-<需求名>/`;
 - 阶段产物按 `<阶段数字>-<阶段名称>.md` 留存,**不删除、不覆盖**(回退重做追加 `-v2`);
-- 涉及页面布局/颜色/样式的功能:MD 只写行为 + 锚点引用,视觉规格用独立 HTML(`视觉规格-<模块>.html`)承载,评审所见即所得。
+- 涉及页面布局/颜色/样式的功能:MD 只写行为 + 锚点引用,视觉规格用独立 HTML(`视觉规格-<模块>.html`)承载,评审所见即所得;
+- 完整产出示例见 `docs/examples/`(含视觉规格 HTML,可直接浏览器打开体验)。
 
 ## 说明与注意事项
 

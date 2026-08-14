@@ -10,9 +10,9 @@
 !.workbuddy/skills/
 !.workbuddy/skills/req-sop-harness/
 
-# ===== SOP Harness 运行时状态(不进仓库) =====
-.sop/state/
-!.sop/state/README.md   # 保留状态层模板说明,仅忽略运行时生成文件
+# ===== SOP Harness 运行时状态(不进仓库,保留模板说明) =====
+.sop/state/*
+!.sop/state/README.md
 
 # ===== 通用 =====
 node_modules/

@@ -58,14 +58,49 @@ clone 本仓库后,在 WorkBuddy 中打开本项目,直接说:
 ## 目录结构
 
 ```
-├── .sop/                    # 运行时规则库(SOP.md / commands / templates / checklists / stages 六阶段 / state)
+├── .sop/                        # ① 规则库(安装的核心,自包含)
+│   ├── SOP.md                   #    主规则:命令速查 / 六阶段流程 / HITL / 状态管理 / 输出约定(必读入口)
+│   ├── commands.md              #    命令参考:/sop:new|init|req|clarify|prd|review|gate|ship|status
+│   ├── README.md                #    .sop/ 骨架说明与接入方式
+│   ├── stages/                  #    六阶段 DO/DON'T(权威规则源)
+│   │   ├── README.md            #      阶段总览与索引
+│   │   └── 01-需求采集.md
+│   │       ~ 06-交付集成.md      #      每阶段:目标 / 输入 / 该做什么 / 不该做什么 / 产出 / 门禁
+│   ├── templates/               #    输出模板
+│   │   ├── PRD-模板.md          #      PRD 主文档结构(9 章,FR 编号 + Given-When-Then 验收)
+│   │   └── 视觉规格-模板.html    #      视觉规格(布局/颜色/状态演示)
+│   ├── checklists/
+│   │   └── 门禁清单.md          #    05 门禁的 7 项检查 + 打回规则
+│   └── state/                   #    状态层(模板随仓库;运行时文件被 git 忽略)
+│       └── README.md            #      requirements 索引 / decisions 决策 / session 进度 / project-context 档案
 ├── docs/
-│   ├── requirements/        # 需求工作目录:<日期>-<需求名>/ 下 01~06 阶段产物全留存
-│   ├── examples/            # 示例产物(试跑 PRD + 视觉规格 HTML)
-│   └── research/            # 项目调研报告
-├── .workbuddy/skills/       # 项目级技能(随仓库分发,克隆即用)
-└── .gitignore
+│   ├── requirements/            # ② 需求工作目录(运行时生成):每需求一个目录,阶段产物全留存
+│   │   └── <YYYYMMDD>-<需求名>/ #      01~06 阶段文件 + 视觉规格 HTML
+│   ├── examples/                # ③ 示例产物:试跑 PRD + 视觉规格 HTML(浏览器可直接打开)
+│   └── research/                # ④ 项目调研报告(市场调研 / 选型依据)
+├── .workbuddy/skills/           # ⑤ 项目级技能(随仓库分发,WorkBuddy 里一句话即可触发)
+├── .sopignore                   # ⑥ 上下文扫描排除规则(AI 扫描项目时忽略的目录/文件)
+├── .gitignore                   # ⑦ git 忽略规则(agent 配置 / 本地数据 / 运行时状态不进仓库)
+├── LICENSE                      # ⑧ MIT 许可证
+└── README.md                    # 本文件
 ```
+
+### 各目录/文件的意义
+
+| 路径 | 角色 | 说明 |
+|---|---|---|
+| `.sop/` | **规则库(安装核心)** | 安装后全部规则都在这里,自包含、纯 Markdown、随项目走;换 agent / 换机器不丢 |
+| `.sop/SOP.md` | 主规则 | AI 加载后即按六阶段执行需求整理;定义命令、HITL、状态管理、输出约定 |
+| `.sop/stages/` | 阶段规则 | 六阶段"该做什么/不该做什么"的完整权威源,`SOP.md` 引用它 |
+| `.sop/templates/` | 输出模板 | PRD 主文档结构与视觉规格 HTML 模板,`/sop:prd` 强制遵循 |
+| `.sop/checklists/` | 门禁清单 | `/sop:gate` 执行的 7 项质量检查,不过关打回对应阶段 |
+| `.sop/state/` | 状态层 | 跨会话记忆:需求索引 / 决策 / 进度 / 项目档案(运行时生成) |
+| `docs/requirements/` | 需求资产 | 每个需求一个目录,阶段产物 01~06 全留存、不删除(团队共享) |
+| `docs/examples/` | 示例 | 试跑产生的 PRD 与视觉规格,可直接打开体验产出形态 |
+| `docs/research/` | 调研 | 项目立项时的市场调研与选型报告 |
+| `.workbuddy/skills/` | 技能 | WorkBuddy 项目级技能,clone 后"一句话安装";与复制提示词安装等价 |
+| `.sopignore` | 扫描排除 | `/sop:init`、`/sop:req` 扫描项目上下文时忽略的目录/文件 |
+| `.gitignore` | git 排除 | agent 配置(`.codebuddy/`、`.claude/`)、本地缓存、运行时状态不进仓库 |
 
 ## 产物形态
 

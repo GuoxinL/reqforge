@@ -17,14 +17,21 @@
 │   ├── PRD-模板.md        # PRD 主文档结构(9 章,FR 编号 + Given-When-Then 验收)
 │   └── 视觉规格-模板.html # 视觉规格文件模板(布局/颜色/状态演示;MD 中锚点引用之)
 ├── checklists/
-│   └── 门禁清单.md        # 05 门禁的 6 大检查项 + 打回规则
+│   └── 门禁清单.md        # 05 门禁的 7 大检查项 + 打回规则
+├── stages/
+│   ├── README.md          # 六阶段 DO/DON'T 索引
+│   ├── 01-需求采集.md      # 每阶段:目标/输入/该做什么/不该做什么/产出/门禁
+│   ├── 02-需求澄清.md
+│   ├── 03-文档结构化.md
+│   ├── 04-多方评审.md
+│   ├── 05-质量门禁.md
+│   └── 06-交付集成.md
 └── state/
     └── README.md          # 状态层:requirements / decisions / session / project-context 模板
 .sopignore                 # 上下文扫描排除规则
 AGENTS.md                  # 规则引导文件(/sop:init 自动生成或追加)
 CLAUDE.md → AGENTS.md      # 软连接(Claude Code 读取)
 CODEBUDDY.md → AGENTS.md   # 软连接(CodeBuddy 读取)
-docs/sop/                  # 六阶段完整 DO/DON'T 规则(单源,本项目已安装)
 docs/requirements/         # 需求工作目录:每需求一目录,阶段产物留存(见 SOP.md §6)
 ```
 
@@ -74,11 +81,11 @@ ln -s AGENTS.md CODEBUDDY.md
 | 已有项目 | `/sop:init`(建档,一次) | `/sop:req 一句话需求` → 同左 |
 | 随时 | `/sop:status` / `/sop:help` | — |
 
-## 与 docs/sop/ 的关系(单源)
+## 与 stages/ 的关系(单源)
 
-- `docs/sop/stages/` 是六阶段 DO/DON'T 的**权威源**(人类可读的知识库)。
-- `.sop/SOP.md` 内嵌每阶段**摘要规则**,完整规则指向 `docs/sop/stages/`。
-- 规则演进改 `docs/sop/`,运行时由 AI 读取,避免双份维护。
+- `.sop/stages/` 是六阶段 DO/DON'T 的**权威源**(人类可读的知识库),随 `.sop/` 一起分发。
+- `.sop/SOP.md` 内嵌每阶段**摘要规则**,完整规则指向 `stages/`。
+- 规则演进改 `stages/`,运行时由 AI 读取,避免双份维护。
 
 ## 待办 / 演进方向
 

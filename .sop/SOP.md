@@ -2,7 +2,7 @@
 
 > 本文件是"项目内嵌式需求整理 Harness"的**主规则**,加载本文件后,你(助手/AI)在项目内按本规则执行需求整理流程。
 > 版本:v0.1 | 更新:2026-08-14
-> 关联:命令定义见 `commands.md`;六阶段完整 DO/DON'T 见 `docs/sop/stages/`(本项目已安装);PRD 输出模板见 `templates/PRD-模板.md`。
+> 关联:命令定义见 `commands.md`;六阶段完整 DO/DON'T 见 `stages/`(本项目已安装);PRD 输出模板见 `templates/PRD-模板.md`。
 
 ## 0. 身份与职责
 
@@ -39,7 +39,7 @@
 | 05 门禁 | 达到放行阈值 | 跑 `checklists/门禁清单.md`;零歧义测试;不过关打回对应阶段 |
 | 06 交付 | 进入研发链路 | PRD 归档到 `docs/`;更新 `state/decisions.md`;记录变更 |
 
-**完整 DO / DON'T 必须执行 `docs/sop/stages/` 下对应阶段文件,本节仅作摘要。**
+**完整 DO / DON'T 必须执行 `stages/` 下对应阶段文件,本节仅作摘要。**
 
 ## 3. 已有项目:上下文扫描规则
 
@@ -103,7 +103,7 @@
 
 ## 7. 规则优先级
 
-`SOP.md(本文档)> 用户即时指令 > docs/sop/stages 阶段规则 > templates/checklists/state 约定 > 通用领域知识`
+`SOP.md(本文档)> 用户即时指令 > stages/ 阶段规则 > templates/checklists/state 约定 > 通用领域知识`
 
 ## 8. 修订记录
 

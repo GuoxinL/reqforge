@@ -21,7 +21,7 @@ agent_created: true
 
 按以下步骤在目标项目内初始化(注意:不删除用户已有内容):
 
-1. **复制规则库**:将 `assets/dot-sop/` 的全部内容复制为项目根 `.sop/`;将 `assets/stages/` 复制为 `docs/sop/`(六阶段完整 DO/DON'T 规则)。
+1. **复制规则库**:将 `assets/dot-sop/` 的全部内容(含 `stages/` 六阶段规则)复制为项目根 `.sop/`。
 2. **处理 AGENTS.md**(分支):
    - 项目根已存在 `AGENTS.md`(已有项目)→ 在其末尾**追加**"SOP Harness 引用段"(模板见 `.sop/SOP.md` 附录 A),保留原内容;已存在引用则跳过。
    - 不存在(新项目/空目录)→ 新建 `AGENTS.md`(引导内容见附录 A),并创建软连接:`CLAUDE.md → AGENTS.md`、`CODEBUDDY.md → AGENTS.md`;其他工具规则文件按需追加。
@@ -57,7 +57,7 @@ agent_created: true
 - `assets/dot-sop/checklists/门禁清单.md` — 05 门禁 7 大检查项 + 打回规则
 - `assets/dot-sop/state/README.md` — 状态层说明与字段模板
 - `assets/dot-sop/.sopignore` — 上下文扫描排除规则
-- `assets/stages/01~06-*.md` — 六阶段完整 DO/DON'T 规则
+- `assets/dot-sop/stages/01~06-*.md` — 六阶段完整 DO/DON'T 规则
 
 ## 注意事项
 
